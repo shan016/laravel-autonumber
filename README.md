@@ -13,6 +13,13 @@ You can install the package via composer:
 composer require shan016/laravel-autonumber
 ```
 
+## Version Compatibility
+
+| Package | Laravel | PHP |
+|-------|--------|-----|
+| v1.x | 5.1 – 10 | 7.0+ |
+| v2.x | 8 – 12 | 8.1+ |
+
 Register the ServiceProvider in `config/app.php`
 
 ```php
