@@ -1,107 +1,90 @@
-# Laravel 10 AutoNumber
+## 🚀 Laravel AutoNumber v2.0
 
+We’re excited to introduce **v2.0** of Laravel AutoNumber!
+This release brings improved compatibility, cleaner integration, and alignment with modern Laravel standards.
 
+---
 
+## ✨ What’s New
 
-Laravel package to create autonumber for Eloquent model
+* Full support for **Laravel 10**
+* Updated for **PHP 8.1+**
+* Improved stability and performance
+* Cleaner integration with Eloquent model lifecycle
+* Enhanced support for dynamic formats using closures
 
-# Installation
+---
 
-You can install the package via composer:
+## 💥 Breaking Changes
 
-```
-composer require shan016/laravel-autonumber
-```
+* Dropped support for:
 
-Register the ServiceProvider in `config/app.php`
+  * Laravel 8
+  * Laravel 9
+  * PHP versions below 8.1
 
-```php
-'providers' => [
-    // ...
-    Shan016\AutoNumber\AutoNumberServiceProvider::class,
-],
-```
+> If you are using Laravel 8 or 9, please continue using **v1.x**
 
-Publish the default configuration
+---
 
-```
-php artisan vendor:publish --provider='Shan016\AutoNumber\AutoNumberServiceProvider'
-```
+## 🔄 Upgrade Guide
 
-Running migration
+1. Update the package:
 
-```
-php artisan migrate
-```
+   ```bash
+   composer require shan016/laravel-autonumber:^2.0
+   ```
 
-# Usage
+2. (Optional) Republish configuration:
 
-Your Eloquent models should use the `Shan016\AutoNumber\AutoNumberTrait` trait
+   ```bash
+   php artisan vendor:publish --provider="Shan016\AutoNumber\AutoNumberServiceProvider" --force
+   ```
 
-The trait contains an abstract method `getAutoNumberOptions()` that you must implement yourself.
+3. Run migrations:
 
+   ```bash
+   php artisan migrate
+   ```
 
-```php
-use Shan016\AutoNumber\AutoNumberTrait;
-    
-class Order extends Model
-{
-    use AutoNumberTrait;
-    
-    /**
-     * Return the autonumber configuration array for this model.
-     *
-     * @return array
-     */
-    public function getAutoNumberOptions()
-    {
-        return [
-            'order_number' => [
-                'format' => 'SO.?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 5 // The number of digits in an autonumber
-            ]
-        ];
-    }
+4. Verify your model:
 
-}
-```
+   * Uses `AutoNumberTrait`
+   * Implements `getAutoNumberOptions()`
 
-You can also pass a `closure` for the format value.
+---
 
-```php
-public function getAutoNumberOptions()
-{
-    return [
-        'order_number' => [
-            'format' => function () {
-                return 'SO/' . date('Ymd') . '/?'; // autonumber format. '?' will be replaced with the generated number.
-            },
-            'length' => 5 // The number of digits in the autonumber
-        ]
-    ];
-}
-```
-
-## Saving Model
+## 🧪 Example
 
 ```php
 $order = Order::create([
-    'customer' => 'Mr. X',
+    'customer' => 'John Doe',
 ]);
-```
 
-The order_number will be automatically generated based on the format given when saving the Order model.
-
-```php
 echo $order->order_number;
 
-// SO/20170803/00001
+// Example output: SO-00001
 ```
 
-## License
+---
 
-Laravel-autonumber is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## 📦 Installation (Fresh)
 
-## Contributing
+```bash
+composer require shan016/laravel-autonumber:^2.0
+```
 
-Please report any issue you find in the issues page. Pull requests are more than welcome.
+---
+
+## 🙌 Contributing
+
+Contributions are welcome!
+Feel free to open issues or submit pull requests.
+
+---
+
+## ⭐ Support
+
+If you find this package useful, consider giving it a ⭐ on GitHub!
+
+---
